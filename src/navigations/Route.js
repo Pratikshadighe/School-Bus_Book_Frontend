@@ -36,7 +36,7 @@ export default function Route() {
     }
   }, [isAuthenticated]);
 
-  if (loading || appLoading) {
+  if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Loading...</Text>
