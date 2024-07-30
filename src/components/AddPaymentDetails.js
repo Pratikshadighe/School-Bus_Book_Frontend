@@ -7,6 +7,7 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import {formatDate } from 'date-fns';
+import Toast from 'react-native-toast-message';
 const paymentOptions = ['cash', 'online'];
 
 const AddStudentPaymentDetails = () => {
@@ -37,12 +38,21 @@ console.log("item",students)
 
   const handleSubmit = () => {
     if (!paymentDate || !paymentMethod) {
-      Alert.alert("Error", "Please fill out all fields");
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: "Please fill out all fields"
+      });
       return;
     }
   
     if (existingPayment) {
-      Alert.alert("Error", "Payment details already exist for this month");
+     
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: "Payment details already exist for this month"
+      });
       return;
     }
     dispatch(addPayment({ studentId: item._id, 
@@ -118,6 +128,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     marginVertical: 8,
+    color:'black'
   },
   input: {
     height: 45,

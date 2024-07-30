@@ -36,10 +36,10 @@ export default function Route() {
     }
   }, [isAuthenticated]);
 
-  if (loading) {
+  if (isAuthenticated && loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Loading...</Text>
+       <ActivityIndicator size="small" color={'lightcoral'} />
       </View>
     );
   }

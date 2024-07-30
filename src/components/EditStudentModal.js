@@ -4,6 +4,7 @@ import MyButton from './MyButton';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { createStudent, updateStudentDetails } from '../redux/actions/student';
 import { useDispatch } from 'react-redux';
+import Toast from 'react-native-toast-message';
 
 const EditStudentModal = () => {
   const route = useRoute();
@@ -26,7 +27,11 @@ const EditStudentModal = () => {
 
   const handleNext = () => {
     if (!name || !mobileNumber || !amount) {
-      Alert.alert("Error", "Please fill out all fields");
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: "Please fill out all fields"
+      });
       return;
     }
 
@@ -83,6 +88,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     marginVertical: 8,
+    color:'black'
   },
   input: {
     height: 45,

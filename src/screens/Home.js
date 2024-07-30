@@ -105,21 +105,25 @@ const Home = () => {
        
         
         <View style={styles.iconContainer}>
-          <TouchableOpacity style={styles.iconButton} onPress={() => navigate('AddStudentPaymentDetails', { item })}>
-           
-              <Icon name="payment" size={20} color="#fff" />
-           
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.iconButton} onPress={() => navigate('EditStudentDetails', { item })} >
-          
-              <Icon name="edit" size={20} color="#fff" />
-          
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.iconButton} onPress={() => handleDeleteStudent(item._id)}>
          
-              <Icon name="delete" size={20} color="#fff" />
-           
+        <View style={styles.iconWrapper}>
+          <TouchableOpacity style={styles.iconButton} onPress={() => navigate('AddStudentPaymentDetails', { item })}>
+            <Icon name="payment" size={20} color="#fff" />
           </TouchableOpacity>
+          <Text style={styles.iconLabel}>Payment</Text>
+        </View>
+        <View style={styles.iconWrapper}>
+          <TouchableOpacity style={styles.iconButton} onPress={() => navigate('EditStudentDetails', { item })}>
+            <Icon name="edit" size={20} color="#fff" />
+          </TouchableOpacity>
+          <Text style={styles.iconLabel}>Edit</Text>
+        </View>
+        <View style={styles.iconWrapper}>
+          <TouchableOpacity style={styles.iconButton} onPress={() => handleDeleteStudent(item._id)}>
+            <Icon name="delete" size={20} color="#fff" />
+          </TouchableOpacity>
+          <Text style={styles.iconLabel}>Delete</Text>
+        </View>
         </View>
         </TouchableOpacity>
     );
@@ -146,7 +150,7 @@ const Home = () => {
           </Pressable>
         </View>
         {loading ? (
-          <ActivityIndicator size="large" color="#008080" />
+          <ActivityIndicator size="large" color="lightcoral" />
         ) : (
           <FlatList
             data={students}
@@ -180,6 +184,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 20,
+  },
+  iconWrapper: {
+    alignItems: 'center',
+  },
+  iconLabel: {
+    color: '#333',
+    fontSize: 12,
+    marginTop: 5,
   },
   title: {
     fontSize: 24,

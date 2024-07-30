@@ -1,11 +1,12 @@
 import {ActivityIndicator, Pressable, StyleSheet, Text} from 'react-native';
 import React from 'react';
 
-const MyButton = ({title, onPress, isLoading}) => {
+const MyButton = ({title, onPress, loading}) => {
+  console.log("loading",loading)
   return (
     <Pressable onPress={onPress} style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
-      {isLoading && <ActivityIndicator size="small" color={'white'} />}
+      
+      {loading ? <ActivityIndicator size="small" color={'white'} /> : <Text style={styles.title}>{title}</Text>}
     </Pressable>
   );
 };

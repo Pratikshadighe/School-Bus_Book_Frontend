@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import Route from './src/navigations/Route';
 import { Provider } from 'react-redux';
 import { store } from './src/redux/Store';
+import Toast from 'react-native-toast-message';
 
 const App = () => {
   return (
@@ -11,7 +12,7 @@ const App = () => {
        <Provider store={store}>
        <Route />
     </Provider>
-     
+    <Toast ref={(ref) => Toast.setRef(ref)} />
     </View>
   );
 };

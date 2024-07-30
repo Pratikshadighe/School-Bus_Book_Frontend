@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, TextInput, Text, StyleSheet, Alert, ScrollView, TouchableOpacity } from 'react-native';
 import MyButton from './MyButton';
 import { useNavigation } from '@react-navigation/native';
 import { createStudent } from '../redux/actions/student';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Toast from 'react-native-toast-message';
 
 const AddStudentBasicDetails = () => {
   const navigation = useNavigation();
@@ -11,10 +12,15 @@ const AddStudentBasicDetails = () => {
   const [name, setName] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [amount, setAmount] = useState('');
+  const { students, loading,error } = useSelector((state) => state.student);
 
   const handleNext = () => {
     if (!name || !mobileNumber || !amount) {
-      Alert.alert("Error", "Please fill out all fields");
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: "Please fill out all fields"
+      });
       return;
     }
     const newStudent = {
@@ -22,8 +28,15 @@ const AddStudentBasicDetails = () => {
       mobileNumber,
      amount
     };
-
+   
     dispatch(createStudent(newStudent));
+    if (error) {
+      Toast.show({
+        type: 'error',
+        text1: 'Login Error',
+        text2: error
+      });
+    }
     navigation.goBack();
    
   };
@@ -70,6 +83,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     marginVertical: 8,
+    color:'black'
   },
   input: {
     height: 45,

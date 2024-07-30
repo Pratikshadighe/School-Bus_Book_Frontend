@@ -1,8 +1,10 @@
 import { StyleSheet, Text, TextInput, View, Alert, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MyButton from '../components/MyButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../redux/actions/auth';
+import Toast from 'react-native-toast-message';
+import { clearUserError } from '../redux/reducers/authSlice';
 // Adjust the import path as necessary
 
 const Register = () => {
@@ -13,23 +15,41 @@ const Register = () => {
 
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
+  console.log("error",error)
 
-  const handleRegister = () => {
+  const handleRegister =async () => {
     if (!name || !mobileNumber || !email || !password) {
-      Alert.alert('Error', 'Please fill in all fields.');
+     
+        Toast.show({
+          type: 'error',
+          text1: 'Register Error',
+          text2: 'All Fields are Required'
+        });
+      
       return;
     }
 
-    dispatch(registerUser({name,mobileNumber,email,password}))
+    await dispatch(registerUser({name,mobileNumber,email,password}))
       .unwrap()
       .then(() => {
         Alert.alert('Success', 'Registration successful!');
       })
       .catch((err) => {
-        Alert.alert('Error', err.error || 'Registration failed.');
+
+       
+          Toast.show({
+            type: 'error',
+            text1: 'Register Error',
+            text2: err.message
+          });
+        
         // dispatch(clearUserError()); // Clear error after showing alert
       });
   };
+
+  useEffect(()=>{
+    dispatch(clearUserError());
+  },[error])
 
   return (
     <ScrollView>

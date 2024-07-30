@@ -57,7 +57,7 @@ export const loginUser = createAsyncThunk(
       // Handle login failure
       console.error(
         "Login failed:",
-        error.response ? error.response.data : error.message
+        error.response ? error.response.data.message : error.message
       );
       return rejectWithValue({
         error: error.response ? error.response.data : error.message,
