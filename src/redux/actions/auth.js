@@ -37,11 +37,11 @@ export const registerUser = createAsyncThunk(
 // Create an async thunk for logging in a user
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
-  async (formData, { rejectWithValue }) => {
+  async ({email, password}, { rejectWithValue }) => {
     try {
       const response = await api.post(
         "/login",
-        formData
+        {email, password}
         
       );
     console.log(response.data)

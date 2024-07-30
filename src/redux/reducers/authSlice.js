@@ -53,10 +53,10 @@ const authSlice = createSlice({
         state.token = action.payload.token;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        console.log(action.payload); // Log the payload for debugging
+        console.log("action",action.payload.error.message); // Log the payload for debugging
         state.loading = false;
         state.user = null;
-        state.error = action.payload.error || action.payload.error.message; // Ensure the error property is used
+        state.error =  action.payload.error.message; // Ensure the error property is used
         state.isAuthenticated = false;
       })
       .addCase(logout.pending, (state, action) => {

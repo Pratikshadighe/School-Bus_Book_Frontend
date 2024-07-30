@@ -32,7 +32,11 @@ const Register = () => {
     await dispatch(registerUser({name,mobileNumber,email,password}))
       .unwrap()
       .then(() => {
-        Alert.alert('Success', 'Registration successful!');
+        Toast.show({
+          type: 'success',
+          text1: 'Registration',
+          text2: "Registration successful!",
+        });
       })
       .catch((err) => {
 
